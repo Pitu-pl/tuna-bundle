@@ -59,7 +59,9 @@
       "TheCodeine\\TagBundle\\": "src/Tuna/Bundle/TagBundle",
       "TheCodeine\\UserBundle\\": "src/Tuna/Bundle/UserBundle",
       "TheCodeine\\VideoBundle\\": "src/Tuna/Bundle/VideoBundle",
-      "TheCodeine\\TranslationBundle\\": "src/Tuna/Bundle/TranslationBundle"
+      "TheCodeine\\TranslationBundle\\": "src/Tuna/Bundle/TranslationBundle",
+      "TunaCMS\\CommonComponent\\": "src/Tuna/Component/Common",
+      "TunaCMS\\PageComponent\\": "src/Tuna/Component/Page"
     }
   },
   "minimum-stability": "dev",
