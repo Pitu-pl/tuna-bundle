@@ -1,0 +1,25 @@
+TunaCMS\PageComponent\Model\Page:
+    type: mappedSuperclass
+    table: pages
+    gedmo:
+        translation:
+            locale: locale
+    id:
+        id:
+            type: integer
+            generator:
+                - strategy: AUTO
+    fields:
+        title:
+            type: string
+            length: 64
+            gedmo:
+                - translatable
+        teaser:
+            type: text
+            gedmo:
+                - translatable
+        body:
+            type: text
+            gedmo:
+                - translatable

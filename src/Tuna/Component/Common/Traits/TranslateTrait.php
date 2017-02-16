@@ -1,10 +1,11 @@
 <?php
 
-namespace TunaCMS\CommonComponent\Trait;
+namespace TunaCMS\CommonComponent\Traits;
 
 use Doctrine\Common\Collections\ArrayCollection;
+use Gedmo\Translatable\Entity\MappedSuperclass\AbstractPersonalTranslation;
 
-trait TranslatableTrait
+trait TranslateTrait
 {
     /**
      * @var ArrayCollection
@@ -12,7 +13,7 @@ trait TranslatableTrait
     protected $translations;
 
     /**
-     * {@inheritdoc}
+     * @inheritdoc
      */
     public function setTranslations(ArrayCollection $translations)
     {
@@ -26,7 +27,7 @@ trait TranslatableTrait
     }
 
     /**
-     * {@inheritdoc}
+     * @inheritdoc
      */
     public function getTranslations()
     {
@@ -34,7 +35,7 @@ trait TranslatableTrait
     }
 
     /**
-     * {@inheritdoc}
+     * @inheritdoc
      */
     public function addTranslation(AbstractPersonalTranslation $translation)
     {
@@ -47,7 +48,7 @@ trait TranslatableTrait
     }
 
     /**
-     * {@inheritdoc}
+     * @inheritdoc
      */
     public function removeTranslation(AbstractPersonalTranslation $translation)
     {

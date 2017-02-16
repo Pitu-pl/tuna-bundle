@@ -15,11 +15,11 @@ use TunaCMS\CommonComponent\Model\TeaserInterface;
 use TunaCMS\CommonComponent\Model\TimestampInterface;
 use TunaCMS\CommonComponent\Model\TitleInterface;
 use TunaCMS\CommonComponent\Model\TranslateInterface;
-use TunaCMS\CommonComponent\Model\TypeInterface;
 
-interface PageInterface extends
+interface NewsInterface extends
     AttachmentInterface,
     BodyInterface,
+    CategoryInterface,
     GalleryInterface,
     IdInterface,
     ImageInterface,
@@ -29,7 +29,6 @@ interface PageInterface extends
     TeaserInterface,
     TimestampInterface,
     TitleInterface,
-    TranslateInterface,
-    TypeInterface
+    TranslateInterface
 {
 }

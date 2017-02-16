@@ -17,9 +17,10 @@ use TunaCMS\CommonComponent\Model\TitleInterface;
 use TunaCMS\CommonComponent\Model\TranslateInterface;
 use TunaCMS\CommonComponent\Model\TypeInterface;
 
-interface PageInterface extends
+interface CategoryPageInterface extends
     AttachmentInterface,
     BodyInterface,
+    CategoryInterface,
     GalleryInterface,
     IdInterface,
     ImageInterface,

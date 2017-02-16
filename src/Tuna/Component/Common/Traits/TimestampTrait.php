@@ -1,8 +1,8 @@
 <?php
 
-namespace TunaCMS\CommonComponent\Trait;
+namespace TunaCMS\CommonComponent\Traits;
 
-trait TimestampableTrait
+trait TimestampTrait
 {
     /**
      * @var \DateTime
