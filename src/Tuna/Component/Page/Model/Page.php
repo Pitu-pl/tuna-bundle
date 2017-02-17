@@ -5,6 +5,7 @@ namespace TunaCMS\PageComponent\Model;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
+use TunaCMS\CommonComponent\Traits\AliasTrait;
 use TunaCMS\CommonComponent\Traits\AttachmentTrait;
 use TunaCMS\CommonComponent\Traits\BodyTrait;
 use TunaCMS\CommonComponent\Traits\GalleryTrait;
@@ -29,6 +30,7 @@ abstract class Page implements PageInterface
     use SlugTrait;
     use BodyTrait;
     use TitleTrait;
+    use AliasTrait;
     use ImageTrait;
     use LocaleTrait;
     use TeaserTrait;
