@@ -3,18 +3,18 @@
 namespace TheCodeine\PageBundle\EventListener;
 
 use Doctrine\ORM\Event\LifecycleEventArgs;
-use TheCodeine\PageBundle\Entity\AbstractPage;
+use TunaCMS\PageComponent\Model\PageInterface;
 
 class PageAliasListener
 {
-    public function postPersist(AbstractPage $abstractPage, LifecycleEventArgs $event)
+    public function postPersist(PageInterface $pageInterface, LifecycleEventArgs $event)
     {
-        if (null === $abstractPage->getAlias()) {
-            $abstractPage->setAlias($abstractPage->getSlug());
+        if (null === $pageInterface->getAlias()) {
+            $pageInterface->setAlias($pageInterface->getSlug());
 
             $em = $event->getEntityManager();
 
-            $em->persist($abstractPage);
+            $em->persist($pageInterface);
             $em->flush();
         }
     }

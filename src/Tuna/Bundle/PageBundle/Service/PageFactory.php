@@ -2,10 +2,10 @@
 
 namespace TheCodeine\PageBundle\Service;
 
-use TheCodeine\PageBundle\Entity\AbstractPage;
-use TheCodeine\PageBundle\Entity\CategoryPage;
 use TheCodeine\PageBundle\Form\CategoryPageType;
 use TheCodeine\PageBundle\Form\PageType;
+use TunaCMS\PageComponent\Model\CategoryPage;
+use TunaCMS\PageComponent\Model\PageInterface;
 
 class PageFactory
 {
@@ -33,14 +33,14 @@ class PageFactory
     }
 
     /**
-     * @param AbstractPage|null $abstractPage
+     * @param PageInterface|null $pageInterface
      *
      * @return CategoryPageType|PageType
      */
-    public function getFormInstance(AbstractPage $abstractPage = null)
+    public function getFormInstance(PageInterface $pageInterface = null)
     {
         switch (true) {
-            case $abstractPage instanceof CategoryPage:
+            case $pageInterface instanceof CategoryPage:
                 return CategoryPageType::class;
             default:
                 return PageType::class;

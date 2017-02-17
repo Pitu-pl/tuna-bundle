@@ -14,7 +14,7 @@ use TheCodeine\MenuBundle\Entity\Menu;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use TheCodeine\MenuBundle\EventListener\MenuListener;
 use TheCodeine\MenuBundle\Form\MenuType;
-use TheCodeine\PageBundle\Entity\AbstractPage;
+use TunaCMS\PageComponent\Model\PageInterface;
 
 /**
  * @Route("menu")
@@ -46,7 +46,7 @@ class MenuController extends Controller
         }
 
         if (($pageId = $request->query->get('pageId'))) {
-            $page = $em->find(AbstractPage::class, $pageId);
+            $page = $em->find(PageInterface::class, $pageId);
             $menu->setPage($page);
             MenuListener::synchronizeWithPage($menu, $page);
         }
@@ -67,7 +67,7 @@ class MenuController extends Controller
         return [
             'form' => $form->createView(),
             'menu' => $menu,
-            'pageTitlesMap' => $em->getRepository(AbstractPage::class)->getTitlesMap($this->getParameter('locale')),
+            'pageTitlesMap' => $em->getRepository(PageInterface::class)->getTitlesMap($this->getParameter('locale')),
         ];
     }
 
@@ -97,7 +97,7 @@ class MenuController extends Controller
         return [
             'form' => $form->createView(),
             'menu' => $menu,
-            'pageTitlesMap' => $em->getRepository(AbstractPage::class)->getTitlesMap($this->getParameter('locale')),
+            'pageTitlesMap' => $em->getRepository(PageInterface::class)->getTitlesMap($this->getParameter('locale')),
         ];
     }
 

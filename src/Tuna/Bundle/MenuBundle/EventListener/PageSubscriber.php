@@ -5,7 +5,7 @@ namespace TheCodeine\MenuBundle\EventListener;
 use Doctrine\Common\EventSubscriber;
 use Doctrine\ORM\Event\LifecycleEventArgs;
 use TheCodeine\MenuBundle\Entity\Menu;
-use TheCodeine\PageBundle\Entity\AbstractPage;
+use TunaCMS\PageComponent\Model\PageInterface;
 
 class PageSubscriber implements EventSubscriber
 {
@@ -20,7 +20,7 @@ class PageSubscriber implements EventSubscriber
     {
         $page = $args->getEntity();
 
-        if (!$page instanceof AbstractPage) {
+        if (!$page instanceof PageInterface) {
             return;
         }
 

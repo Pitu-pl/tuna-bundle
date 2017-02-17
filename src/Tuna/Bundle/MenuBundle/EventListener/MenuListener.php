@@ -6,7 +6,7 @@ use Doctrine\ORM\Event\LifecycleEventArgs;
 use Doctrine\ORM\Event\PreFlushEventArgs;
 use TheCodeine\MenuBundle\Entity\Menu;
 use TheCodeine\MenuBundle\Entity\MenuTranslation;
-use TheCodeine\PageBundle\Entity\AbstractPage;
+use TunaCMS\PageComponent\Model\PageInterface;
 
 class MenuListener
 {
@@ -23,20 +23,20 @@ class MenuListener
         }
     }
 
-    public static function synchronizeWithPage(Menu $menu = null, AbstractPage $abstractPage = null)
+    public static function synchronizeWithPage(Menu $menu = null, PageInterface $pageInterface = null)
     {
-        if ($menu == null || $abstractPage == null && ($abstractPage = $menu->getPage()) == null) {
+        if ($menu == null || $pageInterface == null && ($pageInterface = $menu->getPage()) == null) {
             return;
         }
 
         $menu
-            ->setLabel($abstractPage->getTitle())
-            ->setPath($abstractPage->getSlug())
-            ->setPublished($abstractPage->isPublished())
+            ->setLabel($pageInterface->getTitle())
+            ->setPath($pageInterface->getSlug())
+            ->setPublished($pageInterface->isPublished())
             ->setExternalUrl(null);
 
         $titleTranslations = [];
-        foreach ($abstractPage->getTranslations() as $t) {
+        foreach ($pageInterface->getTranslations() as $t) {
             if ($t->getField() == 'title') {
                 $titleTranslations[$t->getLocale()] = $t->getContent();
             }

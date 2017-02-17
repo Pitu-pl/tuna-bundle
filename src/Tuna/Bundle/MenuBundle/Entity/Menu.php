@@ -9,7 +9,7 @@ use Symfony\Component\Validator\Constraints as Assert;
 use Gedmo\Translatable\Entity\MappedSuperclass\AbstractPersonalTranslation;
 
 use Symfony\Component\Validator\Context\ExecutionContextInterface;
-use TheCodeine\PageBundle\Entity\AbstractPage;
+use TunaCMS\PageComponent\Model\PageInterface;
 
 /**
  * @Gedmo\Tree(type="nested")
@@ -68,9 +68,9 @@ class Menu
     protected $slug;
 
     /**
-     * @var AbstractPage
+     * @var PageInterface
      *
-     * @ORM\ManyToOne(targetEntity="TheCodeine\PageBundle\Entity\AbstractPage")
+     * @ORM\ManyToOne(targetEntity="TunaCMS\PageComponent\Model\PageInterface")
      * @ORM\JoinColumn(onDelete="SET NULL")
      */
     protected $page;
@@ -259,7 +259,7 @@ class Menu
     }
 
     /**
-     * @return AbstractPage
+     * @return PageInterface
      */
     public function getPage()
     {
@@ -267,12 +267,13 @@ class Menu
     }
 
     /**
-     * @return $this
-     * @param AbstractPage $abstractPage
+     * @param PageInterface $pageInterface
+     *
+     * @return self
      */
-    public function setPage(AbstractPage $abstractPage = null)
+    public function setPage(PageInterface $pageInterface = null)
     {
-        $this->page = $abstractPage;
+        $this->page = $pageInterface;
 
         return $this;
     }

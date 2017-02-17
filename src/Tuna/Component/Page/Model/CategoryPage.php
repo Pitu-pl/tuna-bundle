@@ -4,6 +4,8 @@ namespace TunaCMS\PageComponent\Model;
 
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
+use TunaCMS\CommonComponent\Model\CategoryInterface;
+use TunaCMS\CommonComponent\Traits\AliasTrait;
 use TunaCMS\CommonComponent\Traits\AttachmentTrait;
 use TunaCMS\CommonComponent\Traits\BodyTrait;
 use TunaCMS\CommonComponent\Traits\CategoryTrait;
@@ -22,12 +24,13 @@ use TunaCMS\CommonComponent\Traits\TypeTrait;
 /**
  * CategoryPage
  */
-abstract class CategoryPage implements CategoryPageInterface
+abstract class CategoryPage implements PageInterface, CategoryInterface
 {
     use IdTrait;
     use TypeTrait;
     use SlugTrait;
     use BodyTrait;
+    use AliasTrait;
     use TitleTrait;
     use ImageTrait;
     use LocaleTrait;

@@ -6,6 +6,7 @@ use Doctrine\ORM\EntityRepository;
 use Doctrine\ORM\Query;
 use Doctrine\ORM\QueryBuilder;
 use Gedmo\Translatable\TranslatableListener;
+use TunaCMS\PageComponent\Model\PageInterface;
 
 class PageRepository extends EntityRepository
 {
@@ -39,7 +40,7 @@ class PageRepository extends EntityRepository
     {
         $result = $this->_em->createQueryBuilder()
             ->select('p.id, p.title originalTitle, t.content title, t.locale')
-            ->from(AbstractPage::class, 'p')
+            ->from(PageInterface::class, 'p')
             ->leftJoin('p.translations', 't', Query\Expr\Join::WITH, 't.field = \'title\'')
             ->getQuery()->getArrayResult();
 

@@ -2,9 +2,9 @@
 
 namespace TunaCMS\PageComponent\Model;
 
+use TunaCMS\CommonComponent\Model\AliasInterface;
 use TunaCMS\CommonComponent\Model\AttachmentInterface;
 use TunaCMS\CommonComponent\Model\BodyInterface;
-use TunaCMS\CommonComponent\Model\CategoryInterface;
 use TunaCMS\CommonComponent\Model\GalleryInterface;
 use TunaCMS\CommonComponent\Model\IdInterface;
 use TunaCMS\CommonComponent\Model\ImageInterface;
@@ -18,6 +18,7 @@ use TunaCMS\CommonComponent\Model\TranslateInterface;
 use TunaCMS\CommonComponent\Model\TypeInterface;
 
 interface PageInterface extends
+    AliasInterface,
     AttachmentInterface,
     BodyInterface,
     GalleryInterface,

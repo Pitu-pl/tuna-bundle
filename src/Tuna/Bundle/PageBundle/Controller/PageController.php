@@ -3,7 +3,7 @@
 namespace TheCodeine\PageBundle\Controller;
 
 use Symfony\Component\HttpFoundation\Request;
-use TheCodeine\PageBundle\Entity\AbstractPage;
+use TunaCMS\PageComponent\Model\PageInterface;
 
 class PageController extends AbstractPageController
 {
@@ -18,9 +18,9 @@ class PageController extends AbstractPageController
     /**
      * {@inheritDoc}
      */
-    public function getFormType(AbstractPage $abstractPage)
+    public function getFormType(PageInterface $pageInterface)
     {
-        return $this->get('the_codeine_page.factory')->getFormInstance($abstractPage);
+        return $this->get('the_codeine_page.factory')->getFormInstance($pageInterface);
     }
 
     /**

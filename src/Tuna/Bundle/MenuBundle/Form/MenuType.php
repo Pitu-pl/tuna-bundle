@@ -12,7 +12,7 @@ use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use TheCodeine\MenuBundle\Entity\Menu;
-use TheCodeine\PageBundle\Entity\AbstractPage;
+use TunaCMS\PageComponent\Model\PageInterface;
 
 class MenuType extends AbstractType
 {
@@ -31,7 +31,7 @@ class MenuType extends AbstractType
                 'label' => 'ui.form.labels.published'
             ])
             ->add('page', EntityType::class, [
-                'class' => AbstractPage::class,
+                'class' => PageInterface::class,
                 'property' => 'title',
                 'empty_value' => 'ui.form.labels.not_linked',
                 'attr' => ['class' => 'filtered'],
