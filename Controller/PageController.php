@@ -2,6 +2,7 @@
 
 namespace TheCodeine\AdminBundle\Controller;
 
+use AppBundle\Entity\Page;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\HttpFoundation\JsonResponse;
@@ -37,7 +38,7 @@ class PageController extends Controller
     public function listAction(Request $request)
     {
         $em = $this->getDoctrine()->getManager();
-        $query = $em->getRepository(PageInterface::class)->getListQuery();
+        $query = $em->getRepository(Page::class)->getListQuery();
         $menuMap = $em->getRepository(Menu::class)->getPageMap();
         $page = $request->get('page', 1);
 

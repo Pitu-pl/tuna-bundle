@@ -2,8 +2,8 @@
 
 namespace TheCodeine\PageBundle\Form;
 
+use AppBundle\Entity\Page;
 use Symfony\Component\Form\FormBuilderInterface;
-use TheCodeine\PageBundle\Entity\Page;
 
 class PageType extends AbstractPageType
 {

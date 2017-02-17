@@ -2,7 +2,7 @@
 
 namespace TunaCMS\CommonComponent\Traits;
 
-use TheCodeine\ImageBundle\Entity\Image;
+use TheCodeine\FileBundle\Entity\Image;
 
 trait ImageTrait
 {

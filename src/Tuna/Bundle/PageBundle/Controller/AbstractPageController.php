@@ -2,6 +2,7 @@
 
 namespace TheCodeine\PageBundle\Controller;
 
+use AppBundle\Entity\Page;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\EntityRepository;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
@@ -72,8 +73,9 @@ abstract class AbstractPageController extends Controller
      * @Route("/{id}/edit", name="tuna_page_edit", requirements={"id" = "\d+"})
      * @Template()
      */
-    public function editAction(Request $request, PageInterface $pageInterface)
+    public function editAction(Request $request, $id)
     {
+        $pageInterface = $this->getRepository(Page::class)->find($id);
         $originalAttachments = new ArrayCollection();
         foreach ($pageInterface->getAttachments() as $attachment) {
             $originalAttachments[] = $attachment;

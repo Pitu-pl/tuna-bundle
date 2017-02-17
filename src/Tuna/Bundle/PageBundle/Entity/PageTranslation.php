@@ -14,7 +14,7 @@ use Gedmo\Translatable\Entity\MappedSuperclass\AbstractPersonalTranslation;
 class PageTranslation extends AbstractPersonalTranslation
 {
     /**
-     * @ORM\ManyToOne(targetEntity="Page", inversedBy="translations")
+     * @ORM\ManyToOne(targetEntity="TunaCMS\PageComponent\Model\PageInterface", inversedBy="translations")
      * @ORM\JoinColumn(name="object_id", referencedColumnName="id", onDelete="CASCADE")
      */
     protected $object;
