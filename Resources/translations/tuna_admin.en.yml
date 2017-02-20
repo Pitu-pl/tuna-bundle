@@ -18,6 +18,7 @@ table:
   number: No.
   options: Options
   created: Created
+  updated: Updated
   featured: Featured
   published: Published
 

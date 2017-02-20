@@ -18,6 +18,7 @@ table:
   number: Nr.
   options: Opcje
   created: Utworzony
+  updated: Aktualizowany
   featured: Przypięty
   published: Opublikowany
 

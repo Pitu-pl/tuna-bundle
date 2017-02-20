@@ -11,6 +11,8 @@
                 <th>{{ 'table.number'|trans }}</th>
                 <th>{{ knp_pagination_sortable(pagination, 'table.title'|trans, 'p.title') }}</th>
                 <th>{{ knp_pagination_sortable(pagination, 'table.slug'|trans, 'p.slug') }}</th>
+                <th>{{ knp_pagination_sortable(pagination, 'table.created'|trans, 'p.createdAt') }}</th>
+                <th>{{ knp_pagination_sortable(pagination, 'table.updated'|trans, 'p.updatedAt') }}</th>
                 <th class="center">{{ knp_pagination_sortable(pagination, 'table.published'|trans, 'p.published') }}</th>
                 <th class="center">{{ 'table.menu'|trans }}</th>
                 <th class="text-right">{{ 'table.options'|trans }}</th>
@@ -22,6 +24,8 @@
                     <td>{{ loop.index + offset }}</td>
                     <td>{{ item.title }}</td>
                     <td>{{ item.slug }}</td>
+                    <td>{{ item.createdAt|date('d/m/Y H:i') }}</td>
+                    <td>{{ item.updatedAt|date('d/m/Y H:i') }}</td>
                     <td class="center">
                         <i class="fa fa-{{ item.published ? 'check' : 'times' }}-circle" aria-hidden="true"></i>
                     </td>
