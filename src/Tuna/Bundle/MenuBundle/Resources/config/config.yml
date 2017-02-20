@@ -1,1 +1,2 @@
 the_codeine_menu:
+    model: TheCodeine\MenuBundle\Entity\Menu

@@ -1,4 +1,2 @@
 the_codeine_page:
-    form: TheCodeine\PageBundle\Form\PageType
     model: TheCodeine\PageBundle\Entity\Page
-    repository: TheCodeine\PageBundle\Entity\PageRepository

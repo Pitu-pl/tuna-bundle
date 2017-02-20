@@ -15,6 +15,11 @@ class Configuration implements ConfigurationInterface
         $treeBuilder = new TreeBuilder();
         $rootNode = $treeBuilder->root('the_codeine_menu');
 
+        $rootNode
+            ->children()
+                ->scalarNode('model')->defaultValue('TheCodeine\MenuBundle\Entity\Menu')->end()
+            ->end();
+
         return $treeBuilder;
     }
 }

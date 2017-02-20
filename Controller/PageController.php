@@ -36,9 +36,8 @@ class PageController extends Controller
      */
     public function listAction(Request $request)
     {
-        $em = $this->getDoctrine()->getManager();
         $query = $this->get('the_codeine_page.manager')->getListQuery();
-        $menuMap = $em->getRepository(Menu::class)->getPageMap();
+        $menuMap = $this->get('the_codeine_menu.manager')->getPageMap();
         $page = $request->get('page', 1);
 
         return [
