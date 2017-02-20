@@ -41,6 +41,11 @@ class MenuManager
         return $this->repository->find($id);
     }
 
+    public function getPageMap()
+    {
+        return $this->repository->getPageMap();
+    }
+
     /**
      * @param array $order
      */
