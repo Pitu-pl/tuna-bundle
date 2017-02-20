@@ -2,3 +2,6 @@ services:
     the_codeine_page.factory:
         class: TheCodeine\PageBundle\Service\PageFactory
         arguments: ["%the_codeine_page.model%"]
+    the_codeine_page.manager:
+        class: TheCodeine\PageBundle\Service\PageManager
+        arguments: ["%the_codeine_page.model%", "@doctrine.orm.default_entity_manager"]
