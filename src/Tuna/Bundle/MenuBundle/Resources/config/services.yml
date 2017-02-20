@@ -6,7 +6,7 @@ services:
         arguments: ['@twig', "@doctrine.orm.default_entity_manager", "@router", "%the_codeine_admin.components.menu.default_template%"]
         tags:
             - { name: twig.extension }
-    the_codeine_page.manager:
+    the_codeine_menu.manager:
         class: TheCodeine\MenuBundle\Service\MenuManager
         arguments: ["%the_codeine_menu.model%", "@doctrine.orm.default_entity_manager"]
     tuna.menu.listener.page:
