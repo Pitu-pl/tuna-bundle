@@ -2,7 +2,6 @@
 
 namespace TheCodeine\PageBundle\Controller;
 
-use AppBundle\Entity\Page;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\EntityRepository;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
@@ -13,21 +12,21 @@ use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 use TheCodeine\PageBundle\Form\AbstractPageType;
-use TunaCMS\PageComponent\Model\PageInterface;
+use TunaCMS\PageComponent\Model\Page;
 
 abstract class AbstractPageController extends Controller
 {
     /**
-     * @return PageInterface
+     * @return Page
      */
     abstract public function getNewPage();
 
     /**
-     * @param PageInterface $pageInterface
+     * @param Page $page
      *
      * @return AbstractPageType
      */
-    abstract public function getFormType(PageInterface $pageInterface);
+    abstract public function getFormType(Page $page);
 
     /**
      * @param Request $request
@@ -58,15 +57,15 @@ abstract class AbstractPageController extends Controller
      */
     public function createAction(Request $request)
     {
-        $pageInterface = $this->getNewPage();
-        $form = $this->createForm($this->getFormType($pageInterface), $pageInterface);
+        $page = $this->getNewPage();
+        $form = $this->createForm($this->getFormType($page), $page);
 
         // TODO: Move this to twig
         $form->add('save', SubmitType::class, [
             'label' => 'ui.form.labels.save'
         ]);
 
-        return $this->handleCreate($request, $form, $pageInterface);
+        return $this->handleCreate($request, $form, $page);
     }
 
     /**
@@ -75,59 +74,59 @@ abstract class AbstractPageController extends Controller
      */
     public function editAction(Request $request, $id)
     {
-        $pageInterface = $this->getRepository(Page::class)->find($id);
+        $page = $this->getRepository(Page::class)->find($id);
         $originalAttachments = new ArrayCollection();
-        foreach ($pageInterface->getAttachments() as $attachment) {
+        foreach ($page->getAttachments() as $attachment) {
             $originalAttachments[] = $attachment;
         }
 
         $originalGalleryItems = new ArrayCollection();
-        if ($pageInterface->getGallery()) {
-            foreach ($pageInterface->getGallery()->getItems() as $item) {
+        if ($page->getGallery()) {
+            foreach ($page->getGallery()->getItems() as $item) {
                 $originalGalleryItems[] = $item;
             }
         }
 
-        $form = $this->createForm($this->getFormType($pageInterface), $pageInterface);
+        $form = $this->createForm($this->getFormType($page), $page);
 
         // TODO: Move this to twig
         $form->add('save', SubmitType::class, [
             'label' => 'ui.form.labels.save'
         ]);
 
-        return $this->handleEdit($request, $form, $pageInterface, $originalAttachments, $originalGalleryItems);
+        return $this->handleEdit($request, $form, $page, $originalAttachments, $originalGalleryItems);
     }
 
     /**
      * @Route("/{id}/delete", name="tuna_page_delete", requirements={"id" = "\d+"})
      * @Template()
      */
-    public function deleteAction(Request $request, PageInterface $pageInterface)
+    public function deleteAction(Request $request, Page $page)
     {
-        return $this->handleDelete($request, $pageInterface);
+        return $this->handleDelete($request, $page);
     }
 
     /**
      * @param Request $request
      * @param Form $form
-     * @param PageInterface $pageInterface
+     * @param Page $page
      *
      * @return array|RedirectResponse
      */
-    protected function handleCreate(Request $request, Form $form, PageInterface $pageInterface)
+    protected function handleCreate(Request $request, Form $form, Page $page)
     {
         $form->handleRequest($request);
 
         if ($form->isValid() && !$request->isXmlHttpRequest()) {
             $em = $this->getDoctrine()->getManager();
-            $em->persist($pageInterface);
+            $em->persist($page);
             $em->flush();
 
             return $this->redirect($this->getRedirectUrl($request));
         }
 
         return [
-            'page' => $pageInterface,
+            'page' => $page,
             'form' => $form->createView()
         ];
     }
@@ -135,13 +134,13 @@ abstract class AbstractPageController extends Controller
     /**
      * @param Request $request
      * @param Form $form
-     * @param PageInterface $pageInterface
+     * @param Page $page
      * @param ArrayCollection $originalAttachments
      * @param ArrayCollection $originalGalleryItems
      *
      * @return array|RedirectResponse
      */
-    protected function handleEdit(Request $request, Form $form, PageInterface $pageInterface, ArrayCollection $originalAttachments, ArrayCollection $originalGalleryItems)
+    protected function handleEdit(Request $request, Form $form, Page $page, ArrayCollection $originalAttachments, ArrayCollection $originalGalleryItems)
     {
         $form->handleRequest($request);
 
@@ -149,40 +148,40 @@ abstract class AbstractPageController extends Controller
             $em = $this->getDoctrine()->getManager();
 
             foreach ($originalAttachments as $attachment) {
-                if (false === $pageInterface->getAttachments()->contains($attachment)) {
+                if (false === $page->getAttachments()->contains($attachment)) {
                     $em->remove($attachment);
                 }
             }
 
             foreach ($originalGalleryItems as $item) {
-                if (false === $pageInterface->getGallery()->getItems()->contains($item)) {
+                if (false === $page->getGallery()->getItems()->contains($item)) {
                     $em->remove($item);
                 }
             }
 
-            $em->persist($pageInterface);
+            $em->persist($page);
             $em->flush();
 
             return $this->redirect($this->getRedirectUrl($request));
         }
 
         return [
-            'page' => $pageInterface,
+            'page' => $page,
             'form' => $form->createView()
         ];
     }
 
     /**
      * @param Request $request
-     * @param PageInterface $pageInterface
+     * @param Page $page
      *
      * @return RedirectResponse
      */
-    protected function handleDelete(Request $request, PageInterface $pageInterface)
+    protected function handleDelete(Request $request, Page $page)
     {
         $em = $this->getDoctrine()->getManager();
 
-        $em->remove($pageInterface);
+        $em->remove($page);
         $em->flush();
 
         return $this->redirect($this->getRedirectUrl($request));

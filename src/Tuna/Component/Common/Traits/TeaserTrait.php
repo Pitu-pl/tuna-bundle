@@ -2,10 +2,17 @@
 
 namespace TunaCMS\CommonComponent\Traits;
 
+use Doctrine\ORM\Mapping as ORM;
+use Gedmo\Mapping\Annotation as Gedmo;
+
 trait TeaserTrait
 {
     /**
      * @var string
+     *
+     * @ORM\Column(type="text", nullable=true)
+     *
+     * @Gedmo\Translatable
      */
     protected $teaser;
 

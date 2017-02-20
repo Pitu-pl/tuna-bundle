@@ -2,10 +2,14 @@
 
 namespace TunaCMS\CommonComponent\Traits;
 
+use Doctrine\ORM\Mapping as ORM;
+
 trait PublishTrait
 {
     /**
-     * @var string
+     * @var boolean
+     *
+     * @ORM\Column(type="boolean")
      */
     protected $published;
 

@@ -2,12 +2,19 @@
 
 namespace TunaCMS\CommonComponent\Traits;
 
+use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 use TheCodeine\FileBundle\Entity\Image;
 
 trait ImageTrait
 {
     /**
      * @var Image
+     *
+     * @ORM\OneToOne(targetEntity="TheCodeine\FileBundle\Entity\Image", cascade={"persist", "remove"})
+     * @ORM\JoinColumn(onDelete="SET NULL")
+     *
+     * @Assert\Valid
      */
     protected $image;
 

@@ -2,7 +2,6 @@
 
 namespace TheCodeine\AdminBundle\Controller;
 
-use AppBundle\Entity\Page;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\HttpFoundation\JsonResponse;
@@ -10,7 +9,7 @@ use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpFoundation\Request;
 use TheCodeine\PageBundle\Controller\PageController as Controller;
 use TheCodeine\MenuBundle\Entity\Menu;
-use TunaCMS\PageComponent\Model\PageInterface;
+use TunaCMS\PageComponent\Model\Page;
 
 /**
  * @Route("/page")
@@ -57,8 +56,8 @@ class PageController extends Controller
     {
         $this->denyAccessUnlessGranted('create', 'pages');
 
-        $pageInterface = $this->getNewPage();
-        $form = $this->createForm($this->getFormType($pageInterface), $pageInterface);
+        $page = $this->getNewPage();
+        $form = $this->createForm($this->getFormType($page), $page);
 
         // TODO: Move this to twig
         $form->add('save', SubmitType::class, [
@@ -69,10 +68,10 @@ class PageController extends Controller
             $menuParent = $this->getDoctrine()->getManager()->getReference(Menu::class, $parentId);
         }
 
-        $return = $this->handleCreate($request, $form, $pageInterface);
+        $return = $this->handleCreate($request, $form, $page);
 
         if ($form->isValid() && !$request->isXmlHttpRequest() && isset($menuParent)) {
-            $this->createMenuForPage($menuParent, $pageInterface);
+            $this->createMenuForPage($menuParent, $page);
         }
 
         return $return;
@@ -82,11 +81,11 @@ class PageController extends Controller
      * @Route("/{id}/delete", name="tuna_page_delete", requirements={"id" = "\d+"})
      * @Template()
      */
-    public function deleteAction(Request $request, PageInterface $pageInterface)
+    public function deleteAction(Request $request, Page $page)
     {
         $this->denyAccessUnlessGranted('delete', 'pages');
 
-        return parent::deleteAction($request, $pageInterface);
+        return parent::deleteAction($request, $page);
     }
 
     /**
@@ -95,7 +94,7 @@ class PageController extends Controller
     public function createMenuItemAction(Request $request)
     {
         $em = $this->getDoctrine()->getManager();
-        $page = $em->getReference(PageInterface::class, $request->request->get('pageId'));
+        $page = $em->getReference(Page::class, $request->request->get('pageId'));
         $menuParent = $em->getReference(Menu::class, $request->request->get('menuParentId'));
 
         $this->createMenuForPage($menuParent, $page);
@@ -105,13 +104,13 @@ class PageController extends Controller
 
     /**
      * @param Menu $menuParent
-     * @param PageInterface $pageInterface
+     * @param Page $page
      */
-    private function createMenuForPage(Menu $menuParent, PageInterface $pageInterface)
+    private function createMenuForPage(Menu $menuParent, Page $page)
     {
         $em = $this->getDoctrine()->getManager();
         $menu = new Menu('tmp');
-        $menu->setPage($pageInterface);
+        $menu->setPage($page);
         $menu->setParent($menuParent);
         $em->persist($menu);
         $em->flush();

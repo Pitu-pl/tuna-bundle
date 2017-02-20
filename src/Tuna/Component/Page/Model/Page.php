@@ -5,6 +5,8 @@ namespace TunaCMS\PageComponent\Model;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
+use Doctrine\ORM\Mapping\MappedSuperclass;
+use Symfony\Component\Validator\Constraints as Assert;
 use TunaCMS\CommonComponent\Traits\AliasTrait;
 use TunaCMS\CommonComponent\Traits\AttachmentTrait;
 use TunaCMS\CommonComponent\Traits\BodyTrait;
@@ -21,7 +23,7 @@ use TunaCMS\CommonComponent\Traits\TranslateTrait;
 use TunaCMS\CommonComponent\Traits\TypeTrait;
 
 /**
- * Page
+ * @MappedSuperclass
  */
 abstract class Page implements PageInterface
 {
@@ -39,6 +41,15 @@ abstract class Page implements PageInterface
     use TimestampTrait;
     use TranslateTrait;
     use AttachmentTrait;
+
+    /**
+     * @var ArrayCollection
+     *
+     * @ORM\OneToMany(targetEntity="PageTranslation", mappedBy="object", cascade={"persist", "remove"})
+     *
+     * @Assert\Valid
+     */
+    protected $translations;
 
     /**
      * Page constructor.

@@ -2,10 +2,14 @@
 
 namespace TunaCMS\CommonComponent\Traits;
 
+use Gedmo\Mapping\Annotation as Gedmo;
+
 trait LocaleTrait
 {
     /**
      * @var string
+     *
+     * @Gedmo\Locale
      */
     protected $locale;
 
