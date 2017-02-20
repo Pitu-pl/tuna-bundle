@@ -48,7 +48,7 @@ class PageManager
      */
     public function getTitlesMap($locale)
     {
-        return $this->repository->getTitlesMap($locale);
+        return $this->repository->getTitlesMap($locale, $this->class);
     }
 
     /**

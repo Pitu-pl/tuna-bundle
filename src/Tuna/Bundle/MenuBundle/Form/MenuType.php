@@ -6,6 +6,8 @@ use A2lix\TranslationFormBundle\Form\Type\GedmoTranslationsType;
 use Doctrine\DBAL\Query\QueryBuilder;
 use Doctrine\ORM\EntityRepository;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
+use Symfony\Component\DependencyInjection\ContainerAwareInterface;
+use Symfony\Component\DependencyInjection\ContainerAwareTrait;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
@@ -14,8 +16,10 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 use TheCodeine\MenuBundle\Entity\Menu;
 use TunaCMS\PageComponent\Model\Page;
 
-class MenuType extends AbstractType
+class MenuType extends AbstractType implements ContainerAwareInterface
 {
+    use ContainerAwareTrait;
+
     /**
      * {@inheritDoc}
      */
@@ -31,7 +35,7 @@ class MenuType extends AbstractType
                 'label' => 'ui.form.labels.published'
             ])
             ->add('page', EntityType::class, [
-                'class' => Page::class,
+                'class' => $this->container->getParameter('the_codeine_page.model'),
                 'property' => 'title',
                 'empty_value' => 'ui.form.labels.not_linked',
                 'attr' => ['class' => 'filtered'],

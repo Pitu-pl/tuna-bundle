@@ -20,15 +20,16 @@ class DashboardController extends Controller
      */
     public function indexAction(Request $request)
     {
-        $menuRepository = $this->getDoctrine()->getRepository('TheCodeineMenuBundle:Menu');
-
-        $query = $menuRepository->getStandalonePagesPaginationQuery();
         $page = $request->get('page', 1);
+        $menuManager = $this->get('the_codeine_menu.manager');
 
         return [
-            'menus' => $menuRepository->getMenuTree(null, false),
+            'menus' => $menuManager->getMenuTree(null, false),
             'offset' => ($page - 1) * self::PAGINATE_LIMIT,
-            'pagination' => $this->get('knp_paginator')->paginate($query, $page, self::PAGINATE_LIMIT),
+            'pagination' => $this->get('knp_paginator')->paginate(
+                $menuManager->getStandalonePagesPaginationQuery($this->getParameter('the_codeine_page.model')),
+                $page, self::PAGINATE_LIMIT
+            )
         ];
     }
 }

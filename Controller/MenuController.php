@@ -28,7 +28,7 @@ class MenuController extends Controller
     public function listAction(Request $request)
     {
         return [
-            'menus' => $this->getDoctrine()->getRepository('TheCodeineMenuBundle:Menu')->getMenuTree(null, false),
+            'menus' => $this->get('the_codeine_menu.manager')->getMenuTree(null, false),
         ];
     }
 

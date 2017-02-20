@@ -41,6 +41,9 @@ class MenuManager
         return $this->repository->find($id);
     }
 
+    /**
+     * @return mixed
+     */
     public function getPageMap()
     {
         return $this->repository->getPageMap();
@@ -73,11 +76,22 @@ class MenuManager
     /**
      * @param null $name
      * @param bool $filterUnpublished
+     *
      * @return mixed
      */
     public function getMenuTree($name = null, $filterUnpublished = true)
     {
         return $this->repository->getMenuTree($name, $filterUnpublished);
+    }
+
+    /**
+     * @param string $class
+     *
+     * @return Query
+     */
+    public function getStandalonePagesPaginationQuery($class)
+    {
+        return $this->repository->getStandalonePagesPaginationQuery($class);
     }
 
     /**

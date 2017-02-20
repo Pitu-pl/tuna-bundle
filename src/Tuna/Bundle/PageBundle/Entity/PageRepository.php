@@ -2,6 +2,7 @@
 
 namespace TheCodeine\PageBundle\Entity;
 
+use AppBundle\Entity\Page;
 use Doctrine\ORM\EntityRepository;
 use Doctrine\ORM\Query;
 use Doctrine\ORM\QueryBuilder;
@@ -36,11 +37,11 @@ class PageRepository extends EntityRepository
         return $this->addTranslationWalker($qb)->getResult();
     }
 
-    public function getTitlesMap($defaultLocale)
+    public function getTitlesMap($defaultLocale, $class)
     {
         $result = $this->_em->createQueryBuilder()
             ->select('p.id, p.title originalTitle, t.content title, t.locale')
-            ->from(PageInterface::class, 'p')
+            ->from($class, 'p')
             ->leftJoin('p.translations', 't', Query\Expr\Join::WITH, 't.field = \'title\'')
             ->getQuery()->getArrayResult();
 

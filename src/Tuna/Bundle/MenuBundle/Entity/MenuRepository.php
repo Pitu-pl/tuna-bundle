@@ -93,13 +93,16 @@ class MenuRepository extends NestedTreeRepository
     }
 
     /**
-     * @return \Doctrine\ORM\QueryBuilder
+     * @param string $class
+     *
+     * @return Query
      */
-    public function getStandalonePagesPaginationQuery()
+    public function getStandalonePagesPaginationQuery($class)
     {
-        return $this->_em->createQuery('
-        SELECT p FROM AppBundle\Entity\Page p WHERE p.id NOT IN (
-            SELECT p2.id FROM TheCodeineMenuBundle:Menu m JOIN AppBundle\Entity\Page p2 WITH p2 = m.page
-        )');
+        return $this->_em->createQuery("
+            SELECT p FROM ${class} p WHERE p.id NOT IN (
+                SELECT p2.id FROM TheCodeineMenuBundle:Menu m JOIN ${class} p2 WITH p2 = m.page
+            )
+        ");
     }
 }
