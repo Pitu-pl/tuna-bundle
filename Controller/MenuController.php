@@ -97,7 +97,7 @@ class MenuController extends Controller
         return [
             'form' => $form->createView(),
             'menu' => $menu,
-            'pageTitlesMap' => $em->getRepository($this->getParameter('the_codeine_page.model'))->getTitlesMap($this->getParameter('locale')),
+            'pageTitlesMap' => $this->get('the_codeine_page.manager')->getTitlesMap($this->getParameter('locale')),
         ];
     }
 

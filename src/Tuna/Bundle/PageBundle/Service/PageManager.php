@@ -4,6 +4,7 @@ namespace TheCodeine\PageBundle\Service;
 
 use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\EntityRepository;
+use Doctrine\ORM\Query;
 
 class PageManager
 {
@@ -31,12 +32,33 @@ class PageManager
     }
 
     /**
+     * @param int $id
+     *
+     * @return null|object
+     */
+    public function find($id)
+    {
+        return $this->repository->find($id);
+    }
+
+    /**
      * @param string $locale
-     * @return mixed
+     *
+     * @return array
      */
     public function getTitlesMap($locale)
     {
         return $this->repository->getTitlesMap($locale);
+    }
+
+    /**
+     * @param bool $onlyPublished
+     *
+     * @return Query
+     */
+    public function getListQuery($onlyPublished = false)
+    {
+        return $this->repository->getListQuery($onlyPublished);
     }
 
     /**

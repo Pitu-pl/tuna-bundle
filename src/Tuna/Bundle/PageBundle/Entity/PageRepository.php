@@ -15,11 +15,11 @@ class PageRepository extends EntityRepository
         return $this->findBy(['published' => true]);
     }
 
-    public function getListQuery($published = null)
+    public function getListQuery($onlyPublished = false)
     {
         $query = $this->createQueryBuilder('p');
 
-        if ($published !== null) {
+        if ($onlyPublished) {
             $query->andWhere('p.published = 1');
         }
 

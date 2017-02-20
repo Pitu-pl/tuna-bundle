@@ -74,7 +74,8 @@ abstract class AbstractPageController extends Controller
      */
     public function editAction(Request $request, $id)
     {
-        $page = $this->getRepository(Page::class)->find($id);
+        $page = $this->get('the_codeine_page.manager')->find($id);
+
         $originalAttachments = new ArrayCollection();
         foreach ($page->getAttachments() as $attachment) {
             $originalAttachments[] = $attachment;
