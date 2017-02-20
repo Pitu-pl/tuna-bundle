@@ -43,15 +43,6 @@ abstract class Page implements PageInterface
     use AttachmentTrait;
 
     /**
-     * @var ArrayCollection
-     *
-     * @ORM\OneToMany(targetEntity="PageTranslation", mappedBy="object", cascade={"persist", "remove"})
-     *
-     * @Assert\Valid
-     */
-    protected $translations;
-
-    /**
      * Page constructor.
      */
     public function __construct()
