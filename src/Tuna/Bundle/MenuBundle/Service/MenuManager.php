@@ -1,6 +1,6 @@
 <?php
 
-namespace TheCodeine\PageBundle\Service;
+namespace TheCodeine\MenuBundle\Service;
 
 use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\EntityRepository;
