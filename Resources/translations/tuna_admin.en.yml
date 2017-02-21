@@ -120,6 +120,8 @@ ui:
       start.date: Start date
       not_linked: Not assigned to page
       create.date: Create date
+      choose:
+        category: Choose category
       attachment:
         title: Attachment title
       image:

@@ -120,6 +120,8 @@ ui:
       start.date: Data rozpoczęcia
       not_linked: Nieprzypisany do strony
       create.date: Data utworzenia
+      choose:
+        category: Wybierz kategorię
       attachment:
         title: Tytuł załącznika
       image:
