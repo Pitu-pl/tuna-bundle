@@ -18,19 +18,16 @@ use TunaCMS\CommonComponent\Model\TranslateInterface;
 use TunaCMS\CommonComponent\Model\TypeInterface;
 
 interface PageInterface extends
-    AliasInterface,
-    AttachmentInterface,
-    BodyInterface,
-    GalleryInterface,
     IdInterface,
-    ImageInterface,
-    LocaleInterface,
-    PublishInterface,
+    TypeInterface,
     SlugInterface,
-    TeaserInterface,
-    TimestampInterface,
+    BodyInterface,
     TitleInterface,
-    TranslateInterface,
-    TypeInterface
+    AliasInterface,
+    LocaleInterface,
+    TeaserInterface,
+    PublishInterface,
+    TimestampInterface,
+    TranslateInterface
 {
 }

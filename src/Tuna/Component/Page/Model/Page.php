@@ -33,21 +33,17 @@ abstract class Page implements PageInterface
     use BodyTrait;
     use TitleTrait;
     use AliasTrait;
-    use ImageTrait;
     use LocaleTrait;
     use TeaserTrait;
-    use GalleryTrait;
     use PublishTrait;
     use TimestampTrait;
     use TranslateTrait;
-    use AttachmentTrait;
 
     /**
      * Page constructor.
      */
     public function __construct()
     {
-        $this->setAttachments(new ArrayCollection());
         $this->setTranslations(new ArrayCollection());
         $this->setPublished(false);
     }
