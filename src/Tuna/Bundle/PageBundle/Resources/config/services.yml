@@ -10,6 +10,6 @@ services:
     the_codeine_page.page_type:
         class: "%the_codeine_page.form%"
         calls:
-          - [setContainer, ["@service_container"]]
+          - [setModelClass, ["%the_codeine_page.model%"]]
         tags:
-            - { name: form.type, alias: "container_aware" }
+            - { name: form.type }

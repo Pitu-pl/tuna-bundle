@@ -3,8 +3,6 @@
 namespace TheCodeine\PageBundle\Form;
 
 use A2lix\TranslationFormBundle\Form\Type\GedmoTranslationsType;
-use Symfony\Component\DependencyInjection\ContainerAwareInterface;
-use Symfony\Component\DependencyInjection\ContainerAwareTrait;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -13,14 +11,17 @@ use Symfony\Component\Form\FormEvents;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use TunaCMS\EditorBundle\Form\EditorType;
 
-class PageType extends AbstractType implements ContainerAwareInterface
+class PageType extends AbstractType
 {
-    use ContainerAwareTrait;
-
     /**
      * @var bool
      */
     private $validate;
+
+    /**
+     * @var string
+     */
+    private $modelClass;
 
     /**
      * PageType constructor.
@@ -30,6 +31,14 @@ class PageType extends AbstractType implements ContainerAwareInterface
     public function __construct($validate = false)
     {
         $this->validate = $validate;
+    }
+
+    /**
+     * @param string $modelClass
+     */
+    public function setModelClass($modelClass)
+    {
+        $this->modelClass = $modelClass;
     }
 
     /**
@@ -49,7 +58,7 @@ class PageType extends AbstractType implements ContainerAwareInterface
                 'label' => 'ui.form.labels.published'
             ])
             ->add('translations', GedmoTranslationsType::class, [
-                'translatable_class' => $this->container->getParameter('the_codeine_page.model'),
+                'translatable_class' => $this->modelClass,
                 'fields' => [
                     'title' => [
                         'required' => true,
@@ -79,7 +88,7 @@ class PageType extends AbstractType implements ContainerAwareInterface
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults([
-            'data_class' => $this->container->getParameter('the_codeine_page.model'),
+            'data_class' => $this->modelClass,
             'translation_domain' => 'tuna_admin',
         ]);
     }
