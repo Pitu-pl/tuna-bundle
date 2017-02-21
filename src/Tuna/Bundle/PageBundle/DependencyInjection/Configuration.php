@@ -17,6 +17,7 @@ class Configuration implements ConfigurationInterface
 
         $rootNode
             ->children()
+                ->scalarNode('form')->defaultValue('TheCodeine\PageBundle\Form\PageType')->end()
                 ->scalarNode('model')->defaultValue('TheCodeine\PageBundle\Entity\Page')->end()
             ->end();
 

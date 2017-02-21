@@ -12,15 +12,22 @@ class PageFactory
     /**
      * @var string
      */
-    protected $model;
+    private $form;
+
+    /**
+     * @var string
+     */
+    private $model;
 
     /**
      * PageFactory constructor.
      *
+     * @param string $form
      * @param string $model
      */
-    public function __construct($model)
+    public function __construct($form, $model)
     {
+        $this->form = $form;
         $this->model = $model;
     }
 
@@ -33,17 +40,10 @@ class PageFactory
     }
 
     /**
-     * @param PageInterface|null $pageInterface
-     *
-     * @return CategoryPageType|PageType
+     * @return string
      */
-    public function getFormInstance(PageInterface $pageInterface = null)
+    public function getFormInstance()
     {
-        switch (true) {
-            case $pageInterface instanceof CategoryPage:
-                return CategoryPageType::class;
-            default:
-                return PageType::class;
-        }
+        return $this->form;
     }
 }

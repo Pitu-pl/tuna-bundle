@@ -22,11 +22,9 @@ abstract class AbstractPageController extends Controller
     abstract public function getNewPage();
 
     /**
-     * @param Page $page
-     *
-     * @return AbstractPageType
+     * @return string
      */
-    abstract public function getFormType(Page $page);
+    abstract public function getFormType();
 
     /**
      * @param Request $request
@@ -58,7 +56,7 @@ abstract class AbstractPageController extends Controller
     public function createAction(Request $request)
     {
         $page = $this->getNewPage();
-        $form = $this->createForm($this->getFormType($page), $page);
+        $form = $this->createForm($this->getFormType(), $page);
 
         // TODO: Move this to twig
         $form->add('save', SubmitType::class, [
@@ -88,7 +86,7 @@ abstract class AbstractPageController extends Controller
             }
         }
 
-        $form = $this->createForm($this->getFormType($page), $page);
+        $form = $this->createForm($this->getFormType(), $page);
 
         // TODO: Move this to twig
         $form->add('save', SubmitType::class, [

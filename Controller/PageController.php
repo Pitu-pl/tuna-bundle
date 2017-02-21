@@ -56,7 +56,7 @@ class PageController extends Controller
         $this->denyAccessUnlessGranted('create', 'pages');
 
         $page = $this->getNewPage();
-        $form = $this->createForm($this->getFormType($page), $page);
+        $form = $this->createForm($this->getFormType(), $page);
 
         // TODO: Move this to twig
         $form->add('save', SubmitType::class, [

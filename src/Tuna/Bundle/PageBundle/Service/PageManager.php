@@ -62,6 +62,14 @@ class PageManager
     }
 
     /**
+     * @return EntityRepository
+     */
+    public function getRepository()
+    {
+        return $this->repository;
+    }
+
+    /**
      * @return string
      */
     public function __toString()

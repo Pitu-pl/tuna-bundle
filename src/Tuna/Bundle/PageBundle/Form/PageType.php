@@ -11,10 +11,6 @@ use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Form\FormEvent;
 use Symfony\Component\Form\FormEvents;
 use Symfony\Component\OptionsResolver\OptionsResolver;
-
-use TheCodeine\FileBundle\Form\AttachmentCollectionType;
-use TheCodeine\FileBundle\Form\MainImageType;
-use TheCodeine\GalleryBundle\Form\GalleryType;
 use TunaCMS\EditorBundle\Form\EditorType;
 
 class PageType extends AbstractType implements ContainerAwareInterface

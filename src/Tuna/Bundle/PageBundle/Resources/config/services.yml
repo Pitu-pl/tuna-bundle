@@ -1,15 +1,15 @@
 services:
     the_codeine_page.factory:
         class: TheCodeine\PageBundle\Service\PageFactory
-        arguments: ["%the_codeine_page.model%"]
+        arguments: ["%the_codeine_page.form%", "%the_codeine_page.model%"]
 
     the_codeine_page.manager:
         class: TheCodeine\PageBundle\Service\PageManager
         arguments: ["%the_codeine_page.model%", "@doctrine.orm.default_entity_manager"]
 
     the_codeine_page.page_type:
-        class: TheCodeine\PageBundle\Form\PageType
+        class: "%the_codeine_page.form%"
         calls:
-          - [setContainer, ['@service_container']]
+          - [setContainer, ["@service_container"]]
         tags:
-            - { name: form.type, alias: 'container_aware' }
+            - { name: form.type, alias: "container_aware" }

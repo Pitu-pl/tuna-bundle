@@ -143,4 +143,5 @@ lexik_translation:
         managed_locales_only: false
 
 the_codeine_page:
+    form: AppBundle\Form\PageType
     model: AppBundle\Entity\Page

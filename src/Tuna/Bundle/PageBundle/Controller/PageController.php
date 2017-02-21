@@ -18,9 +18,9 @@ class PageController extends AbstractPageController
     /**
      * {@inheritDoc}
      */
-    public function getFormType(Page $page)
+    public function getFormType()
     {
-        return $this->get('the_codeine_page.factory')->getFormInstance($page);
+        return $this->get('the_codeine_page.factory')->getFormInstance();
     }
 
     /**
@@ -36,6 +36,6 @@ class PageController extends AbstractPageController
      */
     public function getRepository()
     {
-        return $this->getDoctrine()->getRepository($this->getParameter('the_codeine_page.model'));
+        return $this->get('the_codeine_page.manager')->getRepository();
     }
 }
