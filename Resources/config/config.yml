@@ -101,8 +101,6 @@ assetic:
 
 doctrine:
     orm:
-        resolve_target_entities:
-            TunaCMS\PageComponent\Model\PageInterface: AppBundle\Entity\Page
         mappings:
             gedmo_translatable:
                 type: annotation
@@ -141,7 +139,3 @@ lexik_translation:
     resources_registration:
         type: all
         managed_locales_only: false
-
-the_codeine_page:
-    form: AppBundle\Form\PageType
-    model: AppBundle\Entity\Page
