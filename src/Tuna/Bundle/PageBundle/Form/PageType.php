@@ -83,7 +83,7 @@ class PageType extends AbstractType implements ContainerAwareInterface
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults([
-            'data_class' => $this->getEntityClass(),
+            'data_class' => $this->container->getParameter('the_codeine_page.model'),
             'translation_domain' => 'tuna_admin',
         ]);
     }
