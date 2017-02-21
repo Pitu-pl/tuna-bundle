@@ -4,6 +4,7 @@ namespace TheCodeine\PageBundle\Controller;
 
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\EntityRepository;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
@@ -11,7 +12,8 @@ use Symfony\Component\Form\Form;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
-use TheCodeine\PageBundle\Form\AbstractPageType;
+use TunaCMS\CommonComponent\Model\AttachmentInterface;
+use TunaCMS\CommonComponent\Model\GalleryInterface;
 use TunaCMS\PageComponent\Model\Page;
 
 abstract class AbstractPageController extends Controller
@@ -69,20 +71,23 @@ abstract class AbstractPageController extends Controller
     /**
      * @Route("/{id}/edit", name="tuna_page_edit", requirements={"id" = "\d+"})
      * @Template()
+     * @ParamConverter()
      */
-    public function editAction(Request $request, $id)
+    public function editAction(Request $request, Page $page)
     {
-        $page = $this->get('the_codeine_page.manager')->find($id);
-
         $originalAttachments = new ArrayCollection();
-        foreach ($page->getAttachments() as $attachment) {
-            $originalAttachments[] = $attachment;
+        if ($page instanceof AttachmentInterface) {
+            foreach ($page->getAttachments() as $attachment) {
+                $originalAttachments[] = $attachment;
+            }
         }
 
         $originalGalleryItems = new ArrayCollection();
-        if ($page->getGallery()) {
-            foreach ($page->getGallery()->getItems() as $item) {
-                $originalGalleryItems[] = $item;
+        if ($page instanceof GalleryInterface) {
+            if ($page->getGallery()) {
+                foreach ($page->getGallery()->getItems() as $item) {
+                    $originalGalleryItems[] = $item;
+                }
             }
         }
 
@@ -146,15 +151,19 @@ abstract class AbstractPageController extends Controller
         if ($form->isValid() && !$request->isXmlHttpRequest()) {
             $em = $this->getDoctrine()->getManager();
 
-            foreach ($originalAttachments as $attachment) {
-                if (false === $page->getAttachments()->contains($attachment)) {
-                    $em->remove($attachment);
+            if ($page instanceof AttachmentInterface) {
+                foreach ($originalAttachments as $attachment) {
+                    if (false === $page->getAttachments()->contains($attachment)) {
+                        $em->remove($attachment);
+                    }
                 }
             }
 
-            foreach ($originalGalleryItems as $item) {
-                if (false === $page->getGallery()->getItems()->contains($item)) {
-                    $em->remove($item);
+            if ($page instanceof GalleryInterface) {
+                foreach ($originalGalleryItems as $item) {
+                    if (false === $page->getGallery()->getItems()->contains($item)) {
+                        $em->remove($item);
+                    }
                 }
             }
 

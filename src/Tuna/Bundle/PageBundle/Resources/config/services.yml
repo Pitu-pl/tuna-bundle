@@ -13,3 +13,9 @@ services:
           - [setModelClass, ["%the_codeine_page.model%"]]
         tags:
             - { name: form.type }
+
+    the_codeine_page.param_converter:
+        class: TheCodeine\PageBundle\Request\ParamConverter\PageParamConverter
+        arguments: ["@the_codeine_page.manager"]
+        tags:
+            - { name: request.param_converter }
