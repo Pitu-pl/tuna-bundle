@@ -19,19 +19,3 @@ services:
         arguments: ["@the_codeine_page.manager"]
         tags:
             - { name: request.param_converter }
-
-    the_codeine_page.registry:
-        class: TunaCMS\CommonComponent\Metadata\Registry
-        public: false
-
-    the_codeine_page.orm_mapped_super_class:
-        class: TheCodeine\PageBundle\EventListener\Doctrine\ORMMappedSuperClassSubscriber
-        arguments: ["@the_codeine_page.registry"]
-        tags:
-            - { name: doctrine.event_subscriber }
-
-    the_codeine_page.orm_repository_class:
-        class: TheCodeine\PageBundle\EventListener\Doctrine\ORMMappedSuperClassSubscriber
-        arguments: ["@the_codeine_page.registry"]
-        tags:
-            - { name: doctrine.event_subscriber }
