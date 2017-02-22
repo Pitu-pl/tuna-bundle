@@ -6,6 +6,7 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
 use Doctrine\ORM\Mapping\MappedSuperclass;
+use Sylius\Component\Resource\Model\ResourceInterface;
 use Symfony\Component\Validator\Constraints as Assert;
 use TunaCMS\CommonComponent\Traits\AliasTrait;
 use TunaCMS\CommonComponent\Traits\AttachmentTrait;
@@ -25,7 +26,7 @@ use TunaCMS\CommonComponent\Traits\TypeTrait;
 /**
  * @MappedSuperclass
  */
-abstract class Page implements PageInterface
+abstract class Page implements PageInterface, ResourceInterface
 {
     use IdTrait;
     use TypeTrait;
