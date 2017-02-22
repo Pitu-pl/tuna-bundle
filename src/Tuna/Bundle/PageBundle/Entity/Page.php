@@ -8,8 +8,6 @@ use Symfony\Component\Validator\Constraints as Assert;
 use TunaCMS\PageComponent\Model\Page as BasePage;
 
 /**
- * Page
- *
  * @ORM\MappedSuperclass
  */
 class Page extends BasePage
