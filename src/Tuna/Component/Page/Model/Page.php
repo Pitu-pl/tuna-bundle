@@ -3,7 +3,6 @@
 namespace TunaCMS\PageComponent\Model;
 
 use Doctrine\Common\Collections\ArrayCollection;
-use Sylius\Component\Resource\Model\ResourceInterface;
 use TunaCMS\CommonComponent\Traits\AliasTrait;
 use TunaCMS\CommonComponent\Traits\BodyTrait;
 use TunaCMS\CommonComponent\Traits\IdTrait;
@@ -16,7 +15,7 @@ use TunaCMS\CommonComponent\Traits\TitleTrait;
 use TunaCMS\CommonComponent\Traits\TranslateTrait;
 use TunaCMS\CommonComponent\Traits\TypeTrait;
 
-abstract class Page implements PageInterface, ResourceInterface
+abstract class Page implements PageInterface
 {
     use IdTrait;
     use TypeTrait;
