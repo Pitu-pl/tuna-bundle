@@ -2,12 +2,10 @@
 
 namespace TheCodeine\PageBundle\Entity;
 
-use AppBundle\Entity\Page;
 use Doctrine\ORM\EntityRepository;
 use Doctrine\ORM\Query;
 use Doctrine\ORM\QueryBuilder;
 use Gedmo\Translatable\TranslatableListener;
-use TunaCMS\PageComponent\Model\PageInterface;
 
 class PageRepository extends EntityRepository
 {
