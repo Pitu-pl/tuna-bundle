@@ -21,7 +21,7 @@ services:
             - { name: request.param_converter }
 
     the_codeine_page.registry:
-        class: Sylius\Component\Resource\Metadata\Registry
+        class: TunaCMS\CommonComponent\Metadata\Registry
         public: false
 
     the_codeine_page.orm_mapped_super_class:
