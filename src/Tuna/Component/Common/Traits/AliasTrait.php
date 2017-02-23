@@ -11,7 +11,7 @@ trait AliasTrait
      *
      * @ORM\Column(type="string", nullable=true)
      */
-    protected $alias;
+    private $alias;
 
     /**
      * @inheritdoc

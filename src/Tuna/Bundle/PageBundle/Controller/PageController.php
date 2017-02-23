@@ -3,7 +3,6 @@
 namespace TheCodeine\PageBundle\Controller;
 
 use Symfony\Component\HttpFoundation\Request;
-use TunaCMS\PageComponent\Model\Page;
 
 class PageController extends AbstractPageController
 {

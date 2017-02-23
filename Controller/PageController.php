@@ -9,7 +9,7 @@ use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpFoundation\Request;
 use TheCodeine\PageBundle\Controller\PageController as Controller;
 use TheCodeine\MenuBundle\Entity\Menu;
-use TunaCMS\PageComponent\Model\Page;
+use TunaCMS\PageComponent\Model\AbstractPage;
 
 /**
  * @Route("/page")
@@ -80,7 +80,7 @@ class PageController extends Controller
      * @Route("/{id}/delete", name="tuna_page_delete", requirements={"id" = "\d+"})
      * @Template()
      */
-    public function deleteAction(Request $request, Page $page)
+    public function deleteAction(Request $request, AbstractPage $page)
     {
         $this->denyAccessUnlessGranted('delete', 'pages');
 
@@ -93,7 +93,7 @@ class PageController extends Controller
     public function createMenuItemAction(Request $request)
     {
         $em = $this->getDoctrine()->getManager();
-        $page = $em->getReference(Page::class, $request->request->get('pageId'));
+        $page = $em->getReference(AbstractPage::class, $request->request->get('pageId'));
         $menuParent = $em->getReference(Menu::class, $request->request->get('menuParentId'));
 
         $this->createMenuForPage($menuParent, $page);
@@ -103,9 +103,9 @@ class PageController extends Controller
 
     /**
      * @param Menu $menuParent
-     * @param Page $page
+     * @param AbstractPage $page
      */
-    private function createMenuForPage(Menu $menuParent, Page $page)
+    private function createMenuForPage(Menu $menuParent, AbstractPage $page)
     {
         $em = $this->getDoctrine()->getManager();
         $menu = new Menu('tmp');

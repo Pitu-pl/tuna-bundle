@@ -19,3 +19,9 @@ services:
         arguments: ["@the_codeine_page.manager"]
         tags:
             - { name: request.param_converter }
+
+    the_codeine_page.orm_mapped_super_class:
+        class: TheCodeine\PageBundle\EventListener\Doctrine\ORMMappedSuperClassSubscriber
+        arguments: ["%the_codeine_page.model%"]
+        tags:
+            - { name: doctrine.event_subscriber, priority: 8192 }

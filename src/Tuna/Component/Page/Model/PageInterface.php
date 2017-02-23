@@ -24,10 +24,8 @@ interface PageInterface extends
     BodyInterface,
     TitleInterface,
     AliasInterface,
-    LocaleInterface,
     TeaserInterface,
     PublishInterface,
-    TimestampInterface,
-    TranslateInterface
+    TimestampInterface
 {
 }

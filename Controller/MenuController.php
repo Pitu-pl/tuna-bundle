@@ -14,7 +14,7 @@ use TheCodeine\MenuBundle\Entity\Menu;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use TheCodeine\MenuBundle\EventListener\MenuListener;
 use TheCodeine\MenuBundle\Form\MenuType;
-use TunaCMS\PageComponent\Model\Page;
+use TunaCMS\PageComponent\Model\AbstractPage;
 
 /**
  * @Route("menu")
@@ -46,7 +46,7 @@ class MenuController extends Controller
         }
 
         if (($pageId = $request->query->get('pageId'))) {
-            $page = $em->find(Page::class, $pageId);
+            $page = $em->find(AbstractPage::class, $pageId);
             $menu->setPage($page);
             MenuListener::synchronizeWithPage($menu, $page);
         }

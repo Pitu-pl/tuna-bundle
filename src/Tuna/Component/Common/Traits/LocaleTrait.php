@@ -11,7 +11,7 @@ trait LocaleTrait
      *
      * @Gedmo\Locale
      */
-    protected $locale;
+    private $locale;
 
     /**
      * @inheritdoc

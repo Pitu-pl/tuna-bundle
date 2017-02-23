@@ -14,7 +14,7 @@ trait SlugTrait
      *
      * @Gedmo\Slug(fields={"title"})
      */
-    protected $slug;
+    private $slug;
 
     /**
      * @inheritdoc

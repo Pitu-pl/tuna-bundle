@@ -11,7 +11,7 @@ trait PublishTrait
      *
      * @ORM\Column(type="boolean")
      */
-    protected $published;
+    private $published;
 
     /**
      * @inheritdoc

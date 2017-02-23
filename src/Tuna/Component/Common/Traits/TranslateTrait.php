@@ -3,14 +3,17 @@
 namespace TunaCMS\CommonComponent\Traits;
 
 use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Translatable\Entity\MappedSuperclass\AbstractPersonalTranslation;
 
 trait TranslateTrait
 {
     /**
      * @var ArrayCollection
+     *
+     * @ORM\OneToMany(targetEntity="TheCodeine\PageBundle\Entity\PageTranslation", mappedBy="object", cascade={"persist", "remove"})
      */
-    protected $translations;
+    private $translations;
 
     /**
      * @inheritdoc

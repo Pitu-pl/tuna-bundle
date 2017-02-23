@@ -14,7 +14,7 @@ trait BodyTrait
      *
      * @Gedmo\Translatable
      */
-    protected $body;
+    private $body;
 
     /**
      * @inheritdoc

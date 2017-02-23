@@ -12,7 +12,7 @@ trait CategoryTrait
      *
      * @ORM\ManyToOne(targetEntity="TheCodeine\CategoryBundle\Entity\Category")
      */
-    protected $category;
+    private $category;
 
     /**
      * @inheritdoc

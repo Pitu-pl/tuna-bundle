@@ -14,7 +14,7 @@ trait TeaserTrait
      *
      * @Gedmo\Translatable
      */
-    protected $teaser;
+    private $teaser;
 
     /**
      * @inheritdoc

@@ -16,7 +16,7 @@ trait ImageTrait
      *
      * @Assert\Valid
      */
-    protected $image;
+    private $image;
 
     /**
      * @inheritdoc

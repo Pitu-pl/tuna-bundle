@@ -12,7 +12,7 @@ use TunaCMS\PageComponent\Model\PageInterface;
 class PageParamConverter implements ParamConverterInterface
 {
     const PARAM_CONVERTER_NAME = 'page';
-    const PARAM_CONVERTER_CLASS = 'TunaCMS\PageComponent\Model\Page';
+    const PARAM_CONVERTER_CLASS = 'TheCodeine\PageBundle\Entity\Page';
 
     /**
      * @var PageManager

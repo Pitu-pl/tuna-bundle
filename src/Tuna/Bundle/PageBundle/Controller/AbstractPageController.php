@@ -14,12 +14,12 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 use TunaCMS\CommonComponent\Model\AttachmentInterface;
 use TunaCMS\CommonComponent\Model\GalleryInterface;
-use TunaCMS\PageComponent\Model\Page;
+use TunaCMS\PageComponent\Model\AbstractPage;
 
 abstract class AbstractPageController extends Controller
 {
     /**
-     * @return Page
+     * @return AbstractPage
      */
     abstract public function getNewPage();
 
@@ -73,7 +73,7 @@ abstract class AbstractPageController extends Controller
      * @Template()
      * @ParamConverter()
      */
-    public function editAction(Request $request, Page $page)
+    public function editAction(Request $request, AbstractPage $page)
     {
         $originalAttachments = new ArrayCollection();
         if ($page instanceof AttachmentInterface) {
@@ -105,7 +105,7 @@ abstract class AbstractPageController extends Controller
      * @Route("/{id}/delete", name="tuna_page_delete", requirements={"id" = "\d+"})
      * @Template()
      */
-    public function deleteAction(Request $request, Page $page)
+    public function deleteAction(Request $request, AbstractPage $page)
     {
         return $this->handleDelete($request, $page);
     }
@@ -113,11 +113,11 @@ abstract class AbstractPageController extends Controller
     /**
      * @param Request $request
      * @param Form $form
-     * @param Page $page
+     * @param AbstractPage $page
      *
      * @return array|RedirectResponse
      */
-    protected function handleCreate(Request $request, Form $form, Page $page)
+    protected function handleCreate(Request $request, Form $form, AbstractPage $page)
     {
         $form->handleRequest($request);
 
@@ -138,13 +138,13 @@ abstract class AbstractPageController extends Controller
     /**
      * @param Request $request
      * @param Form $form
-     * @param Page $page
+     * @param AbstractPage $page
      * @param ArrayCollection $originalAttachments
      * @param ArrayCollection $originalGalleryItems
      *
      * @return array|RedirectResponse
      */
-    protected function handleEdit(Request $request, Form $form, Page $page, ArrayCollection $originalAttachments, ArrayCollection $originalGalleryItems)
+    protected function handleEdit(Request $request, Form $form, AbstractPage $page, ArrayCollection $originalAttachments, ArrayCollection $originalGalleryItems)
     {
         $form->handleRequest($request);
 
@@ -181,11 +181,11 @@ abstract class AbstractPageController extends Controller
 
     /**
      * @param Request $request
-     * @param Page $page
+     * @param AbstractPage $page
      *
      * @return RedirectResponse
      */
-    protected function handleDelete(Request $request, Page $page)
+    protected function handleDelete(Request $request, AbstractPage $page)
     {
         $em = $this->getDoctrine()->getManager();
 

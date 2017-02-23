@@ -17,7 +17,7 @@ trait TitleTrait
      *
      * @Gedmo\Translatable
      */
-    protected $title;
+    private $title;
 
     /**
      * @inheritdoc
