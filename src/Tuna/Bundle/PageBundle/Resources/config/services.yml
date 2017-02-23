@@ -25,3 +25,9 @@ services:
         arguments: ["%the_codeine_page.model%"]
         tags:
             - { name: doctrine.event_subscriber, priority: 8192 }
+
+    the_codeine_page.orm_mapped_repository:
+        class: TheCodeine\PageBundle\EventListener\Doctrine\ORMRepositoryClassSubscriber
+        arguments: ["%the_codeine_page.model%", "%the_codeine_page.repository%"]
+        tags:
+            - { name: doctrine.event_subscriber, priority: 8192 }

@@ -19,6 +19,7 @@ class Configuration implements ConfigurationInterface
             ->children()
                 ->scalarNode('form')->cannotBeEmpty()->isRequired()->end()
                 ->scalarNode('model')->cannotBeEmpty()->isRequired()->end()
+                ->scalarNode('repository')->cannotBeEmpty()->isRequired()->end()
             ->end();
 
         return $treeBuilder;
