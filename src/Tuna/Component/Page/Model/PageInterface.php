@@ -3,11 +3,8 @@
 namespace TunaCMS\PageComponent\Model;
 
 use TunaCMS\CommonComponent\Model\AliasInterface;
-use TunaCMS\CommonComponent\Model\AttachmentInterface;
 use TunaCMS\CommonComponent\Model\BodyInterface;
-use TunaCMS\CommonComponent\Model\GalleryInterface;
 use TunaCMS\CommonComponent\Model\IdInterface;
-use TunaCMS\CommonComponent\Model\ImageInterface;
 use TunaCMS\CommonComponent\Model\LocaleInterface;
 use TunaCMS\CommonComponent\Model\PublishInterface;
 use TunaCMS\CommonComponent\Model\SlugInterface;
@@ -25,7 +22,9 @@ interface PageInterface extends
     TitleInterface,
     AliasInterface,
     TeaserInterface,
+    LocaleInterface,
     PublishInterface,
-    TimestampInterface
+    TimestampInterface,
+    TranslateInterface
 {
 }
