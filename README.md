@@ -47,35 +47,49 @@ You can also fine tune Tuna by changing bundle config.
 Here is full option config with defaults:
 
     the_codeine_admin:
+        paths:
+            admin_logo: bundles/thecodeineadmin/images/logo.png
+            editor_config: bundles/tunacmseditor/js/editorConfig.js
+        
+        host: null
+        
+        menu_builder: TheCodeine\AdminBundle\Menu\Builder
+        
+        locale: en
+        
+        locales:
+            - en
+            - pl
+        
         components:
-            events:
-                enabled: false
-            editor:
-                wysiwyg_style_dir: /var/www/app/../vendor/tuna-cms/tuna-bundle/Resources/public/sass/editor
             pages:
                 enabled: true
                 create: true
                 delete: true
+            
+            editor:
+                wysiwyg_style_dir: %kernel.root_dir%/../vendor/tuna-cms/tuna-bundle/Resources/public/sass/editor
+            
             menu:
                 enabled: true
                 default_template: 'TheCodeineMenuBundle:Menu:render_menu.html.twig'
+            
             security:
                 enabled: true
                 use_access_control: true
+            
             news:
                 enabled: true
+            
+            events:
+                enabled: false
+            
             translations:
                 enabled: true
+            
             categories:
                 enabled: false
-        paths:
-            admin_logo: bundles/thecodeineadmin/images/logo.png
-            editor_config: bundles/tunacmseditor/js/editorConfig.js
-        host: null
-        menu_builder: TheCodeine\AdminBundle\Menu\Builder
-        locales:
-            - en
-            - pl
+
 
 
 ## Documentation

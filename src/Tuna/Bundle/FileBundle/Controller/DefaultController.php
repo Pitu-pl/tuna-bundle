@@ -34,7 +34,7 @@ class DefaultController extends Controller
                 $this->get('the_codeine_file.manager.file_manager')->moveUploadedFile($file, $fileInfo['path']);
             } catch (FileException $e) {
                 $translator = $this->get('translator.default');
-                $errorMsg = $translator->trans('error.upload.cant_move', 'validators');
+                $errorMsg = $translator->trans('error.upload.cant_move', [], 'validators');
 
                 return new JsonResponse([
                     'messages' => [$errorMsg]

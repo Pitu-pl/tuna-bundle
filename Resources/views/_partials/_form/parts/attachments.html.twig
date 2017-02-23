@@ -16,7 +16,7 @@
         </a>
         <ul class="attachments clearfix">
             {% for attachment in form %}
-                {{ form_row(attachment) }}
+                {{ form_row(attachment, {label: false}) }}
             {% endfor %}
         </ul>
     </div>

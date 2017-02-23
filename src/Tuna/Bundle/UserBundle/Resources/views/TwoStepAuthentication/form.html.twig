@@ -14,8 +14,6 @@
                     </div>
                 {% endfor %}
 
-                {% block qrCodeContainer %}{% endblock %}
-
                 <div class="login-form">
                     <form class="form" action="" method="post">
                         {% for flashMessage in app.session.flashbag.get('two_factor') %}

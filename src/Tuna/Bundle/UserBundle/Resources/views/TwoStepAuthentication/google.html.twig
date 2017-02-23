@@ -1,7 +1,0 @@
-{% extends "TheCodeineUserBundle::TwoStepAuthentication/_form.html.twig" %}
-
-{% block qrCodeContainer %}
-    <div class="code-block">
-        <img class="img-responsive img-center" src="{{ app.user|generate_core_url }}" />
-    </div>
-{% endblock %}

@@ -11,15 +11,27 @@ use Symfony\Component\DependencyInjection\Loader\YamlFileLoader;
 class TheCodeineAdminExtension extends Extension implements PrependExtensionInterface
 {
     /**
+     * Add here tuna array parameters that can be reused in configs, i.e. user can configure:
+     *
+     *      the_codeine_admin:
+     *          locales: "%locales"
+     *
+     * and tuna is using this parameter in lexik_translation config:
+     *
+     *      lexik_translation:
+     *          managed_locales: "%the_codeine_admin.locales%"
+     *
+     * @var array
+     */
+    private static $ARRAY_PARAMETERS = [
+        'locales'
+    ];
+
+    /**
      * {@inheritDoc}
      */
     public function load(array $configs, ContainerBuilder $container)
     {
-        $configuration = new Configuration();
-        $config = $this->processConfiguration($configuration, $configs);
-
-        $this->setParameters($container, $config);
-
         $loader = new YamlFileLoader($container, new FileLocator(__DIR__ . '/../Resources/config'));
         $loader->load('services.yml');
     }
@@ -32,18 +44,22 @@ class TheCodeineAdminExtension extends Extension implements PrependExtensionInte
         $loader = new YamlFileLoader($container, new FileLocator(__DIR__ . '/../Resources/config'));
 
         $configs = $container->getExtensionConfig($this->getAlias());
+        $this->resolveArrayParameters($container, $configs);
         $config = $this->processConfiguration(new Configuration(), $configs);
 
-        $this->loadSecurityComponent($config['components']['security'], $loader);
+        $this->setParameters($container, $config);
+
+        $this->loadSecurityComponent($container, $config['components']['security'], $loader);
     }
 
     /**
-     * @param array            $config
-     * @param YamlFileLoader    $loader
+     * @param ContainerBuilder $container
+     * @param array $config
+     * @param YamlFileLoader $loader
      */
-    private function loadSecurityComponent(array $config, YamlFileLoader $loader)
+    private function loadSecurityComponent(ContainerBuilder $container, array $config, YamlFileLoader $loader)
     {
-        if (!$config['enabled']) {
+        if (!$this->isConfigEnabled($container, $config)) {
             return;
         }
 
@@ -86,5 +102,20 @@ class TheCodeineAdminExtension extends Extension implements PrependExtensionInte
             }
         }
         return $result;
+    }
+
+    /**
+     * @param ContainerBuilder $container
+     * @param $configs
+     */
+    private function resolveArrayParameters(ContainerBuilder $container, &$configs)
+    {
+        foreach ($configs as &$config) {
+            foreach (self::$ARRAY_PARAMETERS as $parameter) {
+                if (array_key_exists($parameter, $config)) {
+                    $config[$parameter] = $container->getParameterBag()->resolveValue($config[$parameter]);
+                }
+            }
+        }
     }
 }

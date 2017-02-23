@@ -15,6 +15,7 @@ class Configuration implements ConfigurationInterface
     {
         $treeBuilder = new TreeBuilder();
         $rootNode = $treeBuilder->root('the_codeine_admin');
+        // @formatter:off
         $rootNode
             ->children()
                 ->arrayNode('paths')
@@ -26,11 +27,13 @@ class Configuration implements ConfigurationInterface
                 ->end()
                 ->scalarNode('host')->defaultNull()->end()
                 ->scalarNode('menu_builder')->defaultValue('TheCodeine\AdminBundle\Menu\Builder')->end()
+                ->scalarNode('locale')->defaultValue('en')->end()
                 ->arrayNode('locales')
                     ->prototype('scalar')->end()
                     ->defaultValue(['en', 'pl'])
                 ->end()
             ->end();
+        // @formatter:on
 
         $this->addComponentsSection($rootNode);
 
@@ -42,6 +45,7 @@ class Configuration implements ConfigurationInterface
      */
     private function addComponentsSection(ArrayNodeDefinition $rootNode)
     {
+        // @formatter:off
         $sections = $rootNode->children()
             ->arrayNode('components')
             ->addDefaultsIfNotSet()
@@ -51,7 +55,7 @@ class Configuration implements ConfigurationInterface
             ->arrayNode('pages')
                 ->addDefaultsIfNotSet()
                 ->children()
-                    ->booleanNode('enabled')->defaultTrue()->end()
+                    ->booleanNode('enabled')->defaultFalse()->end()
                     ->booleanNode('create')->defaultTrue()->end()
                     ->booleanNode('delete')->defaultTrue()->end()
                 ->end()
@@ -90,6 +94,7 @@ class Configuration implements ConfigurationInterface
                 ->end()
             ->end()
         ;
+        // @formatter:on
 
         $this->addEnabledConfig($sections, 'news', true);
         $this->addEnabledConfig($sections, 'events', false);
@@ -104,6 +109,7 @@ class Configuration implements ConfigurationInterface
      */
     private function addEnabledConfig(ArrayNodeDefinition $node, $name, $defaultValue)
     {
+        // @formatter:off
         $node->children()
             ->arrayNode($name)
                 ->addDefaultsIfNotSet()
@@ -111,5 +117,6 @@ class Configuration implements ConfigurationInterface
                     ->booleanNode('enabled')->defaultValue($defaultValue)->end()
             ->end()
         ;
+        // @formatter:on
     }
 }
