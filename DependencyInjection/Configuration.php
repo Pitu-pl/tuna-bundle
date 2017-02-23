@@ -67,7 +67,7 @@ class Configuration implements ConfigurationInterface
                 ->addDefaultsIfNotSet()
                 ->children()
                     ->scalarNode('wysiwyg_style_dir')
-                        ->defaultValue('%kernel.root_dir%/../vendor/tuna-cms/tuna-bundle/Resources/public/sass/editor')
+                        ->defaultValue('%kernel.root_dir%/../vendor/tuna-cms/tuna-bundle/src/Tuna/Bundle/EditorBundle/Resources/public/sass/editor')
                     ->end()
                 ->end()
             ->end()
