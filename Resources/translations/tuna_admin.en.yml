@@ -45,6 +45,8 @@ security:
     trusted: I amm on a trusted computer
     auth_code: Code
     code_invalid: Invalid code
+  resetting:
+    reset_password: Reset password
 
 # Modal windows
 modal:
