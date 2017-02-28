@@ -47,6 +47,7 @@ security:
     code_invalid: Nieprawidłowy kod
   resetting:
     reset_password: Resetuj hasło
+    question: Zapomniałeś hasła?
 
 # Modal windows
 modal:
